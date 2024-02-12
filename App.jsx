@@ -1,39 +1,64 @@
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import Constants from "expo-constants";
-import { Text, View, Image, StyleSheet} from "react-native";
-import RemoveModal from "./src/components/RemoveModal";
-import CartList from "./src/components/CartList/CartList";
-import CartInput from "./src/components/CartInput/CartInput";
+import { View, StyleSheet, Platform } from "react-native";
+import Home from "./src/screens/Home";
+import ItemListCategories from "./src/screens/ItemListCategories";
+import { useFonts } from "expo-font";
+import { fonts } from './src/global/fonts'
+import { colors } from "./src/global/colors"
+import Cart from "./src/screens/Cart";
+import Profile from "./src/screens/Profile";
+import AllCategories from "./src/screens/AllCategories";
 
 export default function App() {
-  const [cartItems, setCartItems] = useState([]);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [itemSelected, setItemSelected] = useState(null);
+  const [fontsLoaded] = useFonts(fonts)
+  const [categorySelected, setCategorySelected] = useState('')
+  const [screenSelected, setScreenSelected] = useState(null)
+  const [keyword, setKeyword] = useState('')
+  console.log(keyword);
 
-  const findNameItem = (id) => {
-    const product = cartItems.find((i) => i.id === id);
-    return product ? product.name : "";
+  const changeScreen = (screen) => {
+    if (setScreenSelected) {
+      setScreenSelected(screen);
+    }
+  };
+  const renderScreen = () => {
+    switch (screenSelected) {
+      case 'categories':
+        // return <ItemListCategories
+        //   categorySelected={categorySelected}
+        //   keyword={keyword}
+        //   setKeyword={setKeyword}
+        //   onChangeScreen={changeScreen}
+        // />;
+        return <AllCategories
+          onChangeScreen={changeScreen}
+          setCategorySelected={setCategorySelected}
+          categorySelected={categorySelected} />
+      case 'profile':
+        return <Profile onChangeScreen={changeScreen} />;
+      case 'cart':
+        return <Cart onChangeScreen={changeScreen} />;
+      default:
+        return <Home
+          categorySelected={categorySelected}
+          setCategorySelected={setCategorySelected}
+          onChangeScreen={changeScreen} 
+          keyword={keyword}
+          setKeyword={setKeyword}
+          />;
+    }
+  };
+
+  if (!fontsLoaded) {
+    return null
   }
-  const itemName = findNameItem(itemSelected);
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-
-      <RemoveModal
-        modalVisible={modalVisible}
-        cartItems={cartItems}
-        setCartItems={setCartItems}
-        setModalVisible={setModalVisible}
-        itemSelected={itemSelected}
-        itemName={itemName}
-      />
-      <View style={styles.header}>
-        <Text>CARRITO</Text>
-        <Image style={styles.image} source={{ uri: "https://t3.ftcdn.net/jpg/05/60/17/66/360_F_560176615_cUua21qgzxDiLiiyiVGYjUnLSGnVLIi6.jpg" }} />
-      </View>
-      <CartInput cartItems={cartItems} setCartItems={setCartItems}/>
-      <CartList cartItems={cartItems} setModalVisible={setModalVisible} setItemSelected={setItemSelected} />
+      {renderScreen()}
     </View>
   );
 }
@@ -42,17 +67,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: "#fff",
     flex: 1,
-    paddingHorizontal: 12,
-    paddingTop: Constants.statusBarHeight,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 8,
-    alignItems: "center",
-  },
-  image: {
-    width: 50,
-    height: 50,
+    paddingTop: Platform.OS === 'android' ? Constants.statusBarHeight : 0,
+    backgroundColor: colors.primary,
   },
 });

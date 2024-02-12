@@ -2,17 +2,17 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import NavBar from '../components/NavBar'
 
-const Cart = ({onChangeScreen}) => {
+const Profile = ({ onChangeScreen }) => {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Carrito</Text>
+            <Text style={styles.text}>Perfil</Text>
             <NavBar onChangeScreen={onChangeScreen} />
 
         </View>
     )
 }
 
-export default Cart
+export default Profile
 
 const styles = StyleSheet.create({
     container:{

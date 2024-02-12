@@ -1,0 +1,17 @@
+export const colors = {
+    // primary_100: "#d4eaf7",
+    // primary_200: "#b6ccd8",
+    // primary_300: "#3b3c3d",
+    // accent_100: "#71c4ef",
+    // accent_200: "#00668c",
+    text_100: "#ffffff",
+    text_200: "#1d1c1c",
+    text_300: "#313d44",
+    text_400: "#000000",
+    // bg_100: "#fffefb",
+    bg_primary: "#ffffff",
+    bg_secundary: "#f0f3f0",
+    bg_terciary: "#198754",
+    // bg_200: "#f5f4f1",
+    // bg_300: "#cccbc8",
+}
