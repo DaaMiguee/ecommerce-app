@@ -8,6 +8,7 @@ export const colors = {
     text_200: "#1d1c1c",
     text_300: "#313d44",
     text_400: "#000000",
+    text_500: "#198754",
     // bg_100: "#fffefb",
     bg_primary: "#ffffff",
     bg_secundary: "#f0f3f0",

@@ -1,14 +1,12 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import NavBar from '../components/NavBar'
-import categoryData from '../data/categories.json'
-import CategoryItem from '../components/CategoryItem'
-import { colors } from '../global/colors'
-import ProductsView from './ProductsView'
+import { FlatList, StyleSheet, Text, View, ScrollView } from "react-native";
+import React from "react";
+import NavBar from "../components/NavBar";
+import categoryData from "../data/categories.json";
+import CategoryItem from "../components/CategoryItem";
+import { colors } from "../global/colors";
 
-const AllCategories = ({ onChangeScreen, categorySelected, setCategorySelected }) => {
-
-    return !categorySelected ? (
+const AllCategories = ({ navigation }) => {
+    return (
         <View style={styles.container}>
             <Text style={styles.text}>Todas las categorías</Text>
             <View style={styles.listContainer}>
@@ -16,35 +14,37 @@ const AllCategories = ({ onChangeScreen, categorySelected, setCategorySelected }
                     numColumns={2}
                     data={categoryData}
                     keyExtractor={(category) => category}
-                    renderItem={({ item }) => <CategoryItem
-                        style={styles.categoryItem}
-                        category={item}
-                        setCategorySelected={setCategorySelected} />}
+                    renderItem={({ item }) => (
+                        <CategoryItem style={styles.categoryItem} navigation={navigation} category={item} />
+                    )}
                 />
             </View>
-            <NavBar onChangeScreen={onChangeScreen} />
+            <NavBar />
         </View>
-    ) : <ProductsView categorySelected={categorySelected} setCategorySelected={setCategorySelected}/>
-}
+    );
+};
 
-export default AllCategories
+export default AllCategories;
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        backgroundColor: colors.bg_secundary,
     },
     listContainer: {
-        alignItems: 'center',
+        alignItems: "center",
+        flex:1,
+        marginBottom: 70,
     },
     text: {
         fontSize: 20,
-        textAlign: 'center',
+        textAlign: "center",
         marginVertical: 20,
     },
     categoryItem: {
         height: 150,
         width: 170,
         margin: 4,
-        backgroundColor: colors.text_300
+        backgroundColor: colors.bg_primary,
     },
-})
+});

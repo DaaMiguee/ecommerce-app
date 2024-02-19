@@ -1,50 +1,65 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import allProducts from '../data/products.json'
-import Search from '../components/Search'
-import ProductItem from '../components/ProductItem'
-import NavBar from '../components/NavBar'
+import { useEffect, useState } from "react";
+import { View, FlatList, StyleSheet } from "react-native";
+import allProducts from "../data/products.json";
+import ProductItem from "../components/ProductItem";
+import Search from "../components/Search";
 
-const ItemListCategories = ({ categorySelected, keyword, setKeyword, onChangeScreen }) => {
-    const [products, setProducts] = useState([])
-    // const [keyword, setKeyword] = useState('')
+function ItemListCategories({ navigation, route }) {
+  const [products, setProducts] = useState([]);
+  const { category, keyword } = route.params;
 
-    useEffect(() => {
-        if (categorySelected) {
-            const products = allProducts.filter(product => product.category === categorySelected)
-            const productsFiltered = products.filter(product => product.title.includes(keyword))
-            setProducts(productsFiltered)
-        } else {
-            const productsFiltered = allProducts.filter(product => product.title.includes(keyword))
-            setProducts(productsFiltered)
-        }
-    }, [categorySelected, keyword])
+  useEffect(() => {
+    if (category) {
+      const products = allProducts.filter(
+        (product) => product.category === category
+      );
+      const filteredProducts = products.filter((product) =>
+        product.title.includes(keyword)
+      );
+      setProducts(filteredProducts);
+    } else {
+      const filteredProducts = allProducts.filter((product) =>
+        product.title.includes(keyword)
+      );
+      setProducts(filteredProducts);
+    }
+  }, [category, keyword]);
 
-    return (
-        <View style={styles.container}>
-            {/* <Search onSearch={setKeyword} /> */}
-            <View style={styles.cardContainer}>
-                <FlatList
-                    data={products}
-                    keyExtractor={item => item.id}
-                    renderItem={({ item }) => <ProductItem item={item} />}
-                    numColumns={2}
-                />
-            </View>
-            <NavBar onChangeScreen={onChangeScreen} />
-        </View>
-    )
+  return (
+    <View style={styles.container}>
+      <FlatList
+        numColumns={2}
+        data={products}
+        renderItem={({ item }) => (
+          <ProductItem product={item} navigation={navigation} />
+        )}
+        keyExtractor={(item) => item.id}
+        contentContainerStyle={styles.listContent}
+        style={styles.list}
+      />
+    </View>
+  );
 }
 
-export default ItemListCategories
+export default ItemListCategories;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    cardContainer: {
-        alignItems: 'center',
-        paddingVertical: 30,
-        marginVertical: 15,
-    },
-})
+  container: {
+    flex: 1,
+    width: "100%",
+    paddingHorizontal: 12,
+    paddingVertical: 20,
+    justifyContent: "center",
+    alignItems: "center",
+
+  },
+  list:{
+    flex: 1,
+    width: "100%",
+
+  },
+  listContent:{
+    rowGap: 10
+
+  }
+});

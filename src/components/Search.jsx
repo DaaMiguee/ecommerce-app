@@ -4,36 +4,39 @@ import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { colors } from '../global/colors';
 
-const Search = ({ onSearch, keyword }) => {
+const Search = ({ onSearch }) => {
     const [inputValue, setInputValue] = useState('');
     const [error, setError] = useState('')
+    console.log(inputValue);
 
     const search = () => {
         const expression = /\d/;
         if (expression.test(inputValue)) {
             setError('Solo se admiten letras')
+            setTimeout(()=>{setError('')},3000)
         } else {
             setError('');
-            onSearch(keyword)
+            onSearch(inputValue)
         }
-        onSearch(keyword)
+        onSearch(inputValue)
     }
     const removeInput = () => {
         setInputValue('')
         setError('')
+        onSearch('')
     }
 
     return (
         <View  style={styles.container}>
             <View style={styles.subContainer}>
                 <TextInput
-                    placeholder='Busca por título o categoría...'
+                    placeholder='Busca por título...'
                     value={inputValue}
                     onChangeText={text => setInputValue(text)}
                     style={styles.input}
                 />
                 <View style={styles.btnContainer}>
-                    <Pressable style={styles.btn} onPress={()=>search}>
+                    <Pressable style={styles.btn} onPress={search}>
                         <AntDesign name='search1' size={25} color='black' />
                     </Pressable>
                     <Pressable style={styles.btn} onPress={removeInput}>
@@ -51,6 +54,7 @@ export default Search
 const styles = StyleSheet.create({
     container:{
         paddingHorizontal: 12,
+        marginBottom: 20
     },
     subContainer: {
         flexDirection: 'row',
@@ -59,8 +63,8 @@ const styles = StyleSheet.create({
         height: 40,
         width: '80%',
         paddingHorizontal: 15,
-        borderRadius: 4,
-        backgroundColor: colors.bg_secundary
+        borderRadius: 8,
+        backgroundColor: colors.bg_primary
     },
     btnContainer:{
         width: '20%',

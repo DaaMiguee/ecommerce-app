@@ -3,10 +3,10 @@ import React from 'react'
 import Card from './Card'
 import { colors } from '../global/colors';
 
-const CategoryItem = ({ category, setCategorySelected, style}) => {
+const CategoryItem = ({ navigation, category, keyword, style}) => {
     return (
         <Card style={{...styles.card, ...style}}>
-            <Pressable style={styles.categoryBtn} onPress={()=> setCategorySelected(category)}>
+            <Pressable style={styles.categoryBtn} onPress={() => navigation.navigate('ItemListCategories', {category, keyword})}>
                 <Text style={styles.text}>{category}</Text>
             </Pressable>
         </Card>
@@ -18,12 +18,16 @@ export default CategoryItem
 const styles = StyleSheet.create({
     card: {
         borderRadius: 8,
-        width: 110,
-        height: 60,
+        width: 'auto',
+        height: 55,
         marginRight: 6,
-        backgroundColor: colors.bg_terciary,
+        backgroundColor: colors.bg_primary,
         borderRadius: 8,
         overflow: 'hidden',
+        paddingHorizontal:16,
+        borderColor: colors.bg_terciary,
+        borderWidth: 1
+
     },
     categoryBtn:{
         height: '100%',
@@ -32,10 +36,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        fontSize: 14,
-        color: colors.text_100,
+        fontSize: 13,
+        color: colors.text_300,
         textAlign: 'center',
-        fontWeight: 'bold',
-        fontFamily: "PoppinsRegular"
+        fontFamily: "RobotoRegular"
     }
 })

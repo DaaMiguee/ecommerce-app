@@ -2,27 +2,26 @@ import { Pressable, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Entypo, AntDesign, FontAwesome5, Ionicons } from '@expo/vector-icons';
 import { colors } from '../global/colors';
+import { useNavigation } from '@react-navigation/native';
 
-const NavBar = ({ onChangeScreen }) => {
-    const changeScreen = (screen) => {
-        onChangeScreen(screen)
-    }
+const NavBar = () => {
+    const navigation = useNavigation();
     return (
         <View style={styles.container}>
-            <Pressable style={styles.navBtn} onPress={() => changeScreen('')}>
-                <Entypo name="home" size={24} color="white" />
+            <Pressable style={styles.navBtn} onPress={() => navigation.navigate('Home')}>
+                <Entypo name="home" size={22} color={colors.text_200} />
                 <Text style={styles.text}>Inicio</Text>
             </Pressable>
-            <Pressable style={styles.navBtn} onPress={() => changeScreen('categories')}>
-                <AntDesign name="search1" size={24} color="white" />
+            <Pressable style={styles.navBtn} onPress={() => navigation.navigate('AllCategories')}>
+                <AntDesign name="search1" size={22} color={colors.text_200} />
                 <Text style={styles.text}>Categorías</Text>
             </Pressable>
-            <Pressable style={styles.navBtn} onPress={() => changeScreen('cart')}>
-                <FontAwesome5 name="shopping-cart" size={24} color="white" />
+            <Pressable style={styles.navBtn} onPress={() => navigation.navigate('Cart')}>
+                <FontAwesome5 name="shopping-cart" size={22} color={colors.text_200} />
                 <Text style={styles.text}>Carrito</Text>
             </Pressable>
-            <Pressable style={styles.navBtn} onPress={() => changeScreen('profile')}>
-                <Ionicons name="person" size={24} color="white" />
+            <Pressable style={styles.navBtn} onPress={() => navigation.navigate('Profile')}>
+                <Ionicons name="person" size={22} color={colors.text_200} />
                 <Text style={styles.text}>Perfil</Text>
             </Pressable>
         </View>
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         alignItems: "center",
-        backgroundColor: '#111111',
+        backgroundColor: colors.bg_primary,
         position: 'absolute',
         bottom: 0,
         left: 0,
@@ -50,9 +49,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text:{
-        fontFamily: "PoppinsRegular",
-        fontSize: 14,
-        color: colors.text_100,
+        fontFamily: "RobotoRegular",
+        fontSize: 13,
+        color: colors.text_200,
         marginTop: 2,
     }
 })

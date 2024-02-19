@@ -2,8 +2,9 @@ import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
 const Header = ({title}) => {
+
     return (
-        <View>
+        <View style={styles.container}>
             <Text>{title}</Text>
         </View>
     )
@@ -11,4 +12,8 @@ const Header = ({title}) => {
 
 export default Header
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    container:{
+        paddingHorizontal: 12
+    }
+})

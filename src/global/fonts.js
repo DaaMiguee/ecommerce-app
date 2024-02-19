@@ -1,4 +1,5 @@
 export const fonts = {
-    PoppinsBold: require('../../assets/fonts/Poppins-Bold.ttf'),
-    PoppinsRegular: require('../../assets/fonts/Poppins-Regular.ttf'),
+    RobotoRegular: require('../../assets/fonts/roboto/Roboto-Regular.ttf'),
+    RobotoItalic: require('../../assets/fonts/roboto/Roboto-Italic.ttf'),
+    RobotoBold: require('../../assets/fonts/roboto/Roboto-Bold.ttf'),
 }
