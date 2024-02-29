@@ -1,16 +1,14 @@
 import { Text, View, StyleSheet, Pressable, Modal } from "react-native";
 
-const RemoveModal = ({
+const ModalRemove = ({
     modalVisible,
-    cartItems,
-    setCartItems,
     setModalVisible,
-    itemSelected,
     itemName
 }) => {
     const removeItem = () => {
-        const filteredArray = cartItems.filter((item) => item.id !== itemSelected);
-        setCartItems(filteredArray);
+        console.log('eliminado');
+        // const filteredArray = cartItems.filter((item) => item.id !== itemSelected);
+        // setCartItems(filteredArray);
         setModalVisible(false);
     };
 
@@ -29,10 +27,13 @@ const RemoveModal = ({
     );
 };
 
-export default RemoveModal;
+export default ModalRemove;
 
 const styles = StyleSheet.create({
     modalContainer: {
+        position: "absolute",
+        bottom:0,
+        width: "100%",
         height: 220,
         backgroundColor: "#fff",
         borderRadius: 20,

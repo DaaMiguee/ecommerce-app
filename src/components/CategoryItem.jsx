@@ -1,19 +1,26 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import Card from './Card'
+import { Pressable, StyleSheet, Text } from 'react-native';
+import React from 'react';
+import Card from './Card';
 import { colors } from '../global/colors';
+import { useDispatch } from 'react-redux';
+import { setCategorySelected } from '../features/shop/shopSlice';
 
-const CategoryItem = ({ navigation, category, keyword, style}) => {
+const CategoryItem = ({ navigation, category, keyword, style }) => {
+    const dispatch = useDispatch()
     return (
-        <Card style={{...styles.card, ...style}}>
-            <Pressable style={styles.categoryBtn} onPress={() => navigation.navigate('ItemListCategories', {category, keyword})}>
+        <Card style={{ ...styles.card, ...style }}>
+            <Pressable style={styles.categoryBtn} onPress={() => {
+                dispatch(setCategorySelected(category, keyword))
+                navigation.navigate('ItemListCategories', { category, keyword })
+            }}
+            >
                 <Text style={styles.text}>{category}</Text>
             </Pressable>
         </Card>
     )
 }
 
-export default CategoryItem
+export default CategoryItem;
 
 const styles = StyleSheet.create({
     card: {
@@ -24,12 +31,12 @@ const styles = StyleSheet.create({
         backgroundColor: colors.bg_primary,
         borderRadius: 8,
         overflow: 'hidden',
-        paddingHorizontal:16,
+        paddingHorizontal: 16,
         borderColor: colors.bg_terciary,
         borderWidth: 1
 
     },
-    categoryBtn:{
+    categoryBtn: {
         height: '100%',
         width: '100%',
         justifyContent: 'center',
@@ -39,6 +46,6 @@ const styles = StyleSheet.create({
         fontSize: 13,
         color: colors.text_300,
         textAlign: 'center',
-        fontFamily: "RobotoRegular"
+        fontFamily: 'RobotoRegular'
     }
 })

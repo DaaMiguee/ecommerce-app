@@ -1,13 +1,11 @@
-import { StyleSheet, View, TextInput, Pressable, Text } from 'react-native'
-import React, { useState } from 'react'
-import { AntDesign } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
+import { StyleSheet, View, TextInput, Pressable, Text } from 'react-native';
+import React, { useState } from 'react';
+import { AntDesign, Entypo } from '@expo/vector-icons';
 import { colors } from '../global/colors';
 
 const Search = ({ onSearch }) => {
     const [inputValue, setInputValue] = useState('');
     const [error, setError] = useState('')
-    console.log(inputValue);
 
     const search = () => {
         const expression = /\d/;
@@ -64,7 +62,9 @@ const styles = StyleSheet.create({
         width: '80%',
         paddingHorizontal: 15,
         borderRadius: 8,
-        backgroundColor: colors.bg_primary
+        backgroundColor: colors.bg_primary,
+        borderWidth: 1,
+        borderColor: '#d6d6d6',
     },
     btnContainer:{
         width: '20%',

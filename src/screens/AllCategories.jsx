@@ -1,9 +1,8 @@
-import { FlatList, StyleSheet, Text, View, ScrollView } from "react-native";
-import React from "react";
-import NavBar from "../components/NavBar";
-import categoryData from "../data/categories.json";
-import CategoryItem from "../components/CategoryItem";
-import { colors } from "../global/colors";
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import categoryData from '../data/categories.json';
+import CategoryItem from '../components/CategoryItem';
+import { colors } from '../global/colors';
 
 const AllCategories = ({ navigation }) => {
     return (
@@ -19,7 +18,6 @@ const AllCategories = ({ navigation }) => {
                     )}
                 />
             </View>
-            <NavBar />
         </View>
     );
 };
@@ -32,13 +30,13 @@ const styles = StyleSheet.create({
         backgroundColor: colors.bg_secundary,
     },
     listContainer: {
-        alignItems: "center",
+        alignItems: 'center',
         flex:1,
         marginBottom: 70,
     },
     text: {
         fontSize: 20,
-        textAlign: "center",
+        textAlign: 'center',
         marginVertical: 20,
     },
     categoryItem: {

@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, View } from 'react-native';
+import React from 'react';
 
 const Card = ({children, style}) => {
     return (
@@ -9,7 +9,7 @@ const Card = ({children, style}) => {
     )
 }
 
-export default Card
+export default Card;
 
 const styles = StyleSheet.create({
     container:{

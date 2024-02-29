@@ -1,29 +1,15 @@
-import { useEffect, useState } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
-import allProducts from "../data/products.json";
-import ProductItem from "../components/ProductItem";
-import Search from "../components/Search";
+import { useEffect, useState } from 'react';
+import { View, FlatList, StyleSheet } from 'react-native';
+import ProductItem from '../components/ProductItem';
+import { useSelector } from 'react-redux';
 
-function ItemListCategories({ navigation, route }) {
+function ItemListCategories({ navigation }) {
   const [products, setProducts] = useState([]);
-  const { category, keyword } = route.params;
+  const productsFilteredByCategory = useSelector((state) => state.shopReducer.value.productsFilteredByCategory)
 
   useEffect(() => {
-    if (category) {
-      const products = allProducts.filter(
-        (product) => product.category === category
-      );
-      const filteredProducts = products.filter((product) =>
-        product.title.includes(keyword)
-      );
-      setProducts(filteredProducts);
-    } else {
-      const filteredProducts = allProducts.filter((product) =>
-        product.title.includes(keyword)
-      );
-      setProducts(filteredProducts);
-    }
-  }, [category, keyword]);
+    setProducts(productsFilteredByCategory)
+  }, [productsFilteredByCategory]);
 
   return (
     <View style={styles.container}>
@@ -46,19 +32,19 @@ export default ItemListCategories;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
+    width: '100%',
     paddingHorizontal: 12,
     paddingVertical: 20,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
 
   },
-  list:{
+  list: {
     flex: 1,
-    width: "100%",
+    width: '100%',
 
   },
-  listContent:{
+  listContent: {
     rowGap: 10
 
   }

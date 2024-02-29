@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { colors } from '../global/colors';
 
 const Header = ({title}) => {
 
@@ -14,6 +15,7 @@ export default Header
 
 const styles = StyleSheet.create({
     container:{
-        paddingHorizontal: 12
+        paddingHorizontal: 12,
+        backgroundColor: colors.bg_secundary,
     }
 })

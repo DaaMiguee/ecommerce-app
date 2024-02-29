@@ -11,8 +11,10 @@ export const colors = {
     text_500: "#198754",
     // bg_100: "#fffefb",
     bg_primary: "#ffffff",
-    bg_secundary: "#f0f3f0",
+    bg_secundary: "#f1f3f2",
     bg_terciary: "#198754",
+    bg_dark: "#111111",
+    focused: "#198754",
     // bg_200: "#f5f4f1",
     // bg_300: "#cccbc8",
 }

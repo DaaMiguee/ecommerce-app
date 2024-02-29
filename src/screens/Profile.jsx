@@ -1,18 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import NavBar from '../components/NavBar'
+import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
 
 const Profile = ({ onChangeScreen }) => {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Perfil</Text>
-            <NavBar onChangeScreen={onChangeScreen} />
-
         </View>
     )
 }
 
-export default Profile
+export default Profile;
 
 const styles = StyleSheet.create({
     container:{

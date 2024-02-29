@@ -1,8 +1,8 @@
-import { StyleSheet, FlatList, View } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import Card from '../components/Card'
-import ProductItem from '../components/ProductItem'
-import allProducts from '../data/products.json'
+import { StyleSheet, FlatList, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import Card from '../components/Card';
+import ProductItem from '../components/ProductItem';
+import allProducts from '../data/products.json';
 
 const ProductsView = ({ keyword, navigation }) => {
     const [productList, setProductList] = useState([])
@@ -29,7 +29,7 @@ const ProductsView = ({ keyword, navigation }) => {
     )
 }
 
-export default ProductsView
+export default ProductsView;
 
 const styles = StyleSheet.create({
     container: {
