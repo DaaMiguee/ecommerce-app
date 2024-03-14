@@ -12,62 +12,60 @@ import { colors } from '../global/colors';
 const TabNavigator = () => {
     const Tab = createBottomTabNavigator()
     return (
-        <NavigationContainer>
-            <Tab.Navigator
-                screenOptions={{
-                    headerShown: false,
-                    tabBarShowLabel: false,
-                    tabBarStyle: styles.tabBar,
+        <Tab.Navigator
+            screenOptions={{
+                headerShown: false,
+                tabBarShowLabel: false,
+                tabBarStyle: styles.tabBar,
+            }}
+        >
+            <Tab.Screen name='ShopStack' component={ShopStack}
+                options={{
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View style={styles.iconContainer}>
+                                <Entypo name="home" size={22} color={focused ? colors.focused : colors.text_200} />
+                                <Text>Inicio</Text>
+                            </View>
+                        )
+                    }
                 }}
-            >
-                <Tab.Screen name='ShopStack' component={ShopStack}
-                    options={{
-                        tabBarIcon: ({ focused }) => {
-                            return (
-                                <View style={styles.iconContainer}>
-                                    <Entypo name="home" size={22} color={focused ? colors.focused : colors.text_200} />
-                                    <Text>Inicio</Text>
-                                </View>
-                            )
-                        }
-                    }}
-                />
-                <Tab.Screen name='CartStack' component={CartStack}
-                    options={{
-                        tabBarIcon: ({ focused }) => {
-                            return (
-                                <View style={styles.iconContainer}>
-                                    <FontAwesome5 name="shopping-cart" size={22} color={focused ? colors.focused : colors.text_200} />
-                                    <Text>Carrito</Text>
-                                </View>
-                            )
-                        }
-                    }}
-                />
-                <Tab.Screen name='ProfileStack' component={ProfileStack}
-                    options={{
-                        tabBarIcon: ({ focused }) => {
-                            return (
-                                <View style={styles.iconContainer}>
-                                    <Ionicons name="person" size={22} color={focused ? colors.focused : colors.text_200} />
-                                    <Text>Perfil</Text>
-                                </View>
-                            )
-                        }
-                    }} />
-                <Tab.Screen name='OrderStack' component={OrderStack}
-                    options={{
-                        tabBarIcon: ({ focused }) => {
-                            return (
-                                <View style={styles.iconContainer}>
-                                    <Octicons name="list-unordered" size={24} color={focused ? colors.focused : colors.text_200} />
-                                    <Text>Pedidos</Text>
-                                </View>
-                            )
-                        }
-                    }} />
-            </Tab.Navigator>
-        </NavigationContainer>
+            />
+            <Tab.Screen name='CartStack' component={CartStack}
+                options={{
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View style={styles.iconContainer}>
+                                <FontAwesome5 name="shopping-cart" size={22} color={focused ? colors.focused : colors.text_200} />
+                                <Text>Carrito</Text>
+                            </View>
+                        )
+                    }
+                }}
+            />
+            <Tab.Screen name='ProfileStack' component={ProfileStack}
+                options={{
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View style={styles.iconContainer}>
+                                <Ionicons name="person" size={22} color={focused ? colors.focused : colors.text_200} />
+                                <Text>Perfil</Text>
+                            </View>
+                        )
+                    }
+                }} />
+            <Tab.Screen name='OrderStack' component={OrderStack}
+                options={{
+                    tabBarIcon: ({ focused }) => {
+                        return (
+                            <View style={styles.iconContainer}>
+                                <Octicons name="list-unordered" size={24} color={focused ? colors.focused : colors.text_200} />
+                                <Text>Pedidos</Text>
+                            </View>
+                        )
+                    }
+                }} />
+        </Tab.Navigator>
     )
 }
 

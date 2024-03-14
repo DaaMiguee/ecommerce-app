@@ -7,6 +7,7 @@ import { setCategorySelected } from '../features/shop/shopSlice';
 
 const CategoryItem = ({ navigation, category, keyword, style }) => {
     const dispatch = useDispatch()
+
     return (
         <Card style={{ ...styles.card, ...style }}>
             <Pressable style={styles.categoryBtn} onPress={() => {

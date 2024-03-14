@@ -4,8 +4,9 @@ import Card from './Card';
 import { colors } from '../global/colors';
 
 const ProductItem = ({ navigation, product, style }) => {
+  
   return (
-    <Pressable onPress={() => navigation.navigate('ItemDetail', {id: product.id})} style={styles.cardBtn}>
+    <Pressable onPress={() => navigation.navigate('ItemDetail', {id: product.id, product: product})} style={styles.cardBtn}>
       <Card style={{ ...styles.cardStyle, ...style }}>
         <View style={styles.imageContainer}>
           <Image

@@ -1,25 +1,51 @@
 import { useEffect, useState } from 'react';
-import { View, FlatList, StyleSheet } from 'react-native';
+import { View, FlatList, StyleSheet, Text, ActivityIndicator } from 'react-native';
 import ProductItem from '../components/ProductItem';
 import { useSelector } from 'react-redux';
+import { useGetProductsByCategoryQuery } from '../services/shopService';
 
 function ItemListCategories({ navigation }) {
   const [products, setProducts] = useState([]);
-  const productsFilteredByCategory = useSelector((state) => state.shopReducer.value.productsFilteredByCategory)
+  const category = useSelector((state) => state.shopReducer.value.categorySelected);
+  const { data: productsFilteredByCategory, isLoading, error } = useGetProductsByCategoryQuery(category);
 
   useEffect(() => {
-    setProducts(productsFilteredByCategory)
+    if (productsFilteredByCategory) {
+      setProducts(productsFilteredByCategory);
+    }
+    // if (productsFilteredByCategory) {
+    //   const productsRaw = Object.values(productsFilteredByCategory)
+    //   const productsFiltered = productsRaw.filter((product) =>
+    //       product.title.includes(keyword)
+    //   );
+    //   setProducts(productsFiltered);
   }, [productsFilteredByCategory]);
+
+  if (isLoading) {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator size="large" color="#000" />
+      </View>
+    );
+  }
+
+  if (error) {
+    return (
+      <View style={styles.container}>
+        <Text>Error al cargar las categorías.</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <FlatList
         numColumns={2}
-        data={products}
+        data={Object.values(products)} //se convierte objeto a un array para ser leido por flatlist
         renderItem={({ item }) => (
           <ProductItem product={item} navigation={navigation} />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.listContent}
         style={styles.list}
       />
@@ -46,6 +72,5 @@ const styles = StyleSheet.create({
   },
   listContent: {
     rowGap: 10
-
   }
 });

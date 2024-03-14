@@ -1,15 +1,55 @@
-import { FlatList, StyleSheet, View } from 'react-native';
-import React from 'react';
+import { FlatList, StyleSheet, View, Text, ActivityIndicator, Pressable } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import CategoryItem from './CategoryItem';
-import { useSelector } from 'react-redux';
+import { useGetCategoriesQuery } from '../services/shopService';
+import {setCategories} from '../features/shop/shopSlice'
 
 const Categories = ({ navigation, keyword }) => {
-    const categories = useSelector((state) => state.shopReducer.value.categories);
+    const { data: categoriesData, isLoading, error } = useGetCategoriesQuery();
+    
+    const [showAll, setShowAll] = useState(false);
+    const initialCategoriesToShow = 4;
+    
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if (categoriesData) {
+            dispatch(setCategories(categoriesData));
+        }
+    }, [dispatch, categoriesData]);
+
+    let categoriesToDisplay = categoriesData;
+
+    if (!showAll && categoriesData) {
+        categoriesToDisplay = categoriesData.slice(0, initialCategoriesToShow);
+    }
+
+    const handleShowAllPress = () => {
+        // navego pasando por prop las categorias (luego tengo que desestructurar categories de route.params)
+        navigation.navigate('AllCategories', { categoriesData });
+    };
+
+    if (isLoading) {
+        return (
+            <View style={styles.container}>
+                <ActivityIndicator size="large" color="#000" />
+            </View>
+        );
+    }
+
+    if (error) {
+        return (
+            <View style={styles.container}>
+                <Text>Error al cargar las categorías</Text>
+            </View>
+        );
+    }
 
     return (
         <View style={styles.container}>
             <FlatList
-                data={categories}
+                data={categoriesToDisplay}
                 keyExtractor={(category) => category}
                 renderItem={({ item }) => (
                     <CategoryItem
@@ -20,6 +60,11 @@ const Categories = ({ navigation, keyword }) => {
                 )}
                 horizontal={true}
             />
+            {!showAll && (
+                <Pressable onPress={handleShowAllPress}>
+                    <Text>Ver más categorías</Text>
+                </Pressable>
+            )}
         </View>
     );
 };

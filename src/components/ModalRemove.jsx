@@ -1,22 +1,25 @@
 import { Text, View, StyleSheet, Pressable, Modal } from "react-native";
+import { useDispatch } from 'react-redux';
+import { removeItem } from '../features/shop/cartSlice';
 
 const ModalRemove = ({
     modalVisible,
     setModalVisible,
-    itemName
+    itemName,
+    itemId
 }) => {
-    const removeItem = () => {
-        console.log('eliminado');
-        // const filteredArray = cartItems.filter((item) => item.id !== itemSelected);
-        // setCartItems(filteredArray);
+    const dispatch = useDispatch();
+
+    const onRemoveItem = (id) => {
+        dispatch(removeItem(id))
         setModalVisible(false);
     };
 
     return (
         <Modal animationType="fade" transparent visible={modalVisible}>
             <View style={styles.modalContainer}>
-                <Text style={{textAlign: "center", marginBottom:10}}>{`¿Estás seguro de que deseas eliminar "${itemName}" del carrito?`}</Text>
-                <Pressable style={styles.deleteBtn} onPress={removeItem}>
+                <Text style={{ textAlign: "center", marginBottom: 10 }}>{`¿Estás seguro de que deseas eliminar "${itemName}" del carrito?`}</Text>
+                <Pressable style={styles.deleteBtn} onPress={() => onRemoveItem(itemId)}>
                     <Text style={styles.deleteText}>Eliminar</Text>
                 </Pressable>
                 <Pressable style={styles.cancelBtn} onPress={() => setModalVisible(false)}>
@@ -32,7 +35,7 @@ export default ModalRemove;
 const styles = StyleSheet.create({
     modalContainer: {
         position: "absolute",
-        bottom:0,
+        bottom: 0,
         width: "100%",
         height: 220,
         backgroundColor: "#fff",
@@ -59,7 +62,7 @@ const styles = StyleSheet.create({
     deleteText: {
         color: "#fff",
         padding: 10,
-        textAlign:"center"
+        textAlign: "center"
     },
     cancelBtn: {
         borderRadius: 10,
@@ -68,7 +71,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
     },
     cancelText: {
-        textAlign:"center",
+        textAlign: "center",
         padding: 10,
     },
 });

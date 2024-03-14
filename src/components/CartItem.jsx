@@ -16,6 +16,7 @@ const CartItem = ({ product }) => {
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}
         itemName={product.title}
+        itemId={product.id}
       />
       <View style={styles.imageContainer}>
         <Image source={{ uri: product.images[0] }} style={styles.image} resizeMode='contain' />

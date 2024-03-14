@@ -1,18 +1,18 @@
-import { StyleSheet, Text, View, Image, Pressable, ScrollView } from 'react-native';
-import React, { useEffect, useState } from 'react';
-import allProducts from '../data/products.json';
+import { useDispatch } from 'react-redux';
+import { StyleSheet, Text, View, Image, Pressable, ScrollView, ActivityIndicator } from 'react-native';
+import React from 'react';
 import { colors } from '../global/colors';
 import Counter from '../components/Counter';
+import { addItem } from '../features/shop/cartSlice'
 
 const ItemDetail = ({ route }) => {
-  const [product, setProduct] = useState(null);
 
-  const { id } = route.params;
+  const { product } = route.params;
 
-  useEffect(() => {
-    const productFinded = allProducts.find((product) => product.id === id);
-    setProduct(productFinded);
-  }, [id]);
+  const dispatch = useDispatch();
+  const onAddCart = () => {
+    dispatch(addItem({ ...product, quantity: 1 }))
+  }
 
   return (
     <ScrollView style={styles.main}>
@@ -30,16 +30,16 @@ const ItemDetail = ({ route }) => {
           </View>
           <View style={styles.buttonsContainer}>
             <View style={styles.quantityContainer}>
-              <Counter/>
+              <Counter />
             </View>
-            <Pressable style={styles.buy}>
+            <Pressable style={styles.buy} onPress={onAddCart}>
               <Text style={styles.buyText}>Agregar al carrito</Text>
             </Pressable>
           </View>
         </View>
       ) : (
-        <View>
-          <Text>Cargando...</Text>
+        <View style={styles.container}>
+          <ActivityIndicator size="large" color="#000" />
         </View>
       )}
     </ScrollView>
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     padding: 15,
   },
-  buttonsContainer:{
+  buttonsContainer: {
     height: 70,
     flexDirection: 'row',
     width: '100%',
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 21,
     marginTop: 15,
   },
-  quantityContainer:{
+  quantityContainer: {
     width: '35%',
     justifyContent: 'center',
   },

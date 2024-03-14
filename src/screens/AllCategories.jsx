@@ -1,17 +1,18 @@
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import categoryData from '../data/categories.json';
 import CategoryItem from '../components/CategoryItem';
 import { colors } from '../global/colors';
 
-const AllCategories = ({ navigation }) => {
+const AllCategories = ({ navigation, route }) => {
+    const { categoriesData } = route.params;
+    
     return (
         <View style={styles.container}>
             <Text style={styles.text}>Todas las categorías</Text>
             <View style={styles.listContainer}>
                 <FlatList
                     numColumns={2}
-                    data={categoryData}
+                    data={categoriesData}
                     keyExtractor={(category) => category}
                     renderItem={({ item }) => (
                         <CategoryItem style={styles.categoryItem} navigation={navigation} category={item} />
