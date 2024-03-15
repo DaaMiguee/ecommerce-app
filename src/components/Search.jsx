@@ -2,6 +2,7 @@ import { StyleSheet, View, TextInput, Pressable, Text } from 'react-native';
 import React, { useState } from 'react';
 import { AntDesign, Entypo } from '@expo/vector-icons';
 import { colors } from '../global/colors';
+import TextAlert from './TextAlert';
 
 const Search = ({ onSearch }) => {
     const [inputValue, setInputValue] = useState('');
@@ -42,7 +43,7 @@ const Search = ({ onSearch }) => {
                     </Pressable>
                 </View>
             </View>
-            {error ? <Text style={styles.errorMessage}>{error}</Text> : null}
+            {error ? <TextAlert label={error}/> : null}
         </View>
     )
 }
@@ -51,7 +52,7 @@ export default Search
 
 const styles = StyleSheet.create({
     container:{
-        paddingHorizontal: 12,
+        paddingHorizontal: 21,
         marginBottom: 20
     },
     subContainer: {
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
         width: '80%',
         paddingHorizontal: 15,
         borderRadius: 8,
-        backgroundColor: colors.bg_primary,
+        backgroundColor: colors.bg_100,
         borderWidth: 1,
         borderColor: '#d6d6d6',
     },
@@ -78,7 +79,4 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    errorMessage: {
-        color: 'orange',
-    }
 })

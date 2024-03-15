@@ -61,7 +61,7 @@ const Categories = ({ navigation, keyword }) => {
                 horizontal={true}
             />
             {!showAll && (
-                <Pressable onPress={handleShowAllPress}>
+                <Pressable onPress={handleShowAllPress} style={styles.btnShowAll}>
                     <Text>Ver más categorías</Text>
                 </Pressable>
             )}
@@ -74,6 +74,11 @@ export default Categories;
 const styles = StyleSheet.create({
     container: {
         paddingVertical: 10,
-        paddingHorizontal: 12,
+        paddingLeft: 21,
+        gap: 10,
+        alignItems: 'flex-end',
+    },
+    btnShowAll:{
+        marginRight: 21
     },
 });

@@ -31,25 +31,28 @@ const styles = StyleSheet.create({
         gap: 5,
     },
     subtitle: {
+        fontFamily: 'RobotoRegular',
         fontSize: 16,
-        color: colors.text_300,
+        color: colors.text_100,
         width: '100%',
         textAlign: 'left'
     },
     error: {
+        fontFamily: 'RobotoRegular',
         fontSize: 16,
-        color: '#721c24',
-        marginTop: -25,
+        color: colors.error,
         marginBottom: 15
     },
     input: {
+        fontFamily: 'RobotoRegular',
+        fontSize: 14,
         width: "100%",
-        borderWidth: 1,
         paddingHorizontal: 15,
         paddingVertical: 10,
-        fontSize: 14,
         borderColor: colors.text_200,
-        borderRadius: 4,
-        marginBottom: 20,
+        borderRadius: 8,
+        backgroundColor: colors.bg_100,
+        borderWidth: 1,
+        borderColor: '#d6d6d6',
     },
 })

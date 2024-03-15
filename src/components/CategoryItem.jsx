@@ -27,15 +27,14 @@ const styles = StyleSheet.create({
     card: {
         borderRadius: 8,
         width: 'auto',
-        height: 55,
+        height: 60,
         marginRight: 6,
-        backgroundColor: colors.bg_primary,
+        backgroundColor: colors.bg_100,
         borderRadius: 8,
         overflow: 'hidden',
         paddingHorizontal: 16,
-        borderColor: colors.bg_terciary,
+        borderColor: colors.primary_300,
         borderWidth: 1
-
     },
     categoryBtn: {
         height: '100%',
@@ -44,8 +43,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     text: {
-        fontSize: 13,
-        color: colors.text_300,
+        fontSize: 14,
+        color: colors.text_100,
         textAlign: 'center',
         fontFamily: 'RobotoRegular'
     }

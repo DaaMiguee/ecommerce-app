@@ -43,7 +43,10 @@ function ItemListCategories({ navigation }) {
         numColumns={2}
         data={Object.values(products)} //se convierte objeto a un array para ser leido por flatlist
         renderItem={({ item }) => (
-          <ProductItem product={item} navigation={navigation} />
+          <ProductItem
+            product={item}
+            navigation={navigation}
+            styleCard={styles.cardStyle} />
         )}
         keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={styles.listContent}
@@ -72,5 +75,10 @@ const styles = StyleSheet.create({
   },
   listContent: {
     rowGap: 10
+  },
+  cardStyle: {
+    width: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
   }
 });

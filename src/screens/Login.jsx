@@ -8,6 +8,7 @@ import { loginSchema } from '../validations/loginSchema';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../features/auth/authSlice';
 import { useLoginMutation } from '../services/authService';
+import TextAlert from '../components/TextAlert';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState('');
@@ -70,15 +71,15 @@ const Login = ({ navigation }) => {
                 <InputForm label='Email' error={errorMail} onChange={setEmail} />
                 <InputForm label='Contraseña' error={errorPassword} onChange={setPassword} isSecure={true} />
             </View>
-            <Text style={styles.alert}>{errorCredentials}</Text>
+            {errorCredentials ? <TextAlert label={errorCredentials}/> : null}
             <View style={styles.btnContainer}>
-                {result.isLoading ?
-                    <SubmitButton onPress={onSubmit} disabled={result.isLoading} >
+                <SubmitButton disabled={result.isLoading} onPress={onSubmit}>
+                    {result.isLoading ?
                         <ActivityIndicator size="large" color={result.isLoading ? 'white' : null} />
-                    </SubmitButton> :
-                    <SubmitButton onPress={onSubmit} >
-                        <AntDesign name='arrowright' size={25} color='white' />
-                    </SubmitButton>}
+                        :
+                        <AntDesign name='arrowright' size={30} color='white' />
+                    }
+                </SubmitButton>
             </View>
             <View style={styles.toRegisterContainer}>
                 <Pressable onPress={() => navigation.navigate('Signup')}>
@@ -96,12 +97,17 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingHorizontal: 21,
         justifyContent: 'center',
-        gap: 25,
+        gap: 15,
     },
     title: {
-        color: colors.text_400,
+        fontFamily: 'RobotoRegular',
+        color: colors.text_100,
         fontSize: 30,
         fontWeight: '500',
+        paddingVertical: 15,
+    },
+    inputsContainer: {
+        gap: 15,
     },
     btnContainer: {
         justifyContent: 'center',
@@ -110,14 +116,11 @@ const styles = StyleSheet.create({
     toRegisterContainer: {
         justifyContent: 'center',
         alignItems: 'center',
+        marginVertical: 20,
     },
     toRegisterText: {
-        color: colors.text_300,
+        fontFamily: 'RobotoRegular',
+        color: colors.text_200,
         fontSize: 16,
     },
-    alert:{
-        color: '#856404',
-        fontSize: 16,
-        textAlign: 'center',
-    }
 })

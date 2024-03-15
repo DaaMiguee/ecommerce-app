@@ -73,8 +73,12 @@ const Signup = ({ navigation }) => {
                 <InputForm label='Confirma la contraseña' error={errorConfirmPassword} onChange={setConfirmPassword} isSecure={true} />
             </View>
             <View style={styles.btnContainer}>
-                <SubmitButton onPress={onSubmit} >
-                    <AntDesign name='arrowright' size={25} color='white' />
+                <SubmitButton disabled={result.isLoading} onPress={onSubmit}>
+                    {result.isLoading ?
+                        <ActivityIndicator size="large" color={result.isLoading ? 'white' : null} />
+                        :
+                        <AntDesign name='arrowright' size={30} color='white' />
+                    }
                 </SubmitButton>
             </View>
             <View style={styles.goLoginContainer}>
@@ -95,9 +99,11 @@ const styles = StyleSheet.create({
         gap: 25,
     },
     inputsContainer: {
+        gap: 15,
     },
     title: {
-        color: colors.text_400,
+        fontFamily: 'RobotoRegular',
+        color: colors.text_100,
         fontSize: 30,
         fontWeight: '500',
     },
@@ -110,7 +116,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     goLoginText: {
-        color: colors.text_300,
+        fontFamily: 'RobotoRegular',
+        color: colors.text_200,
         fontSize: 16,
     },
 })

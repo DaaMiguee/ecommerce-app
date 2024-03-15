@@ -4,8 +4,9 @@ import React from 'react';
 import { colors } from '../global/colors';
 import Counter from '../components/Counter';
 import { addItem } from '../features/shop/cartSlice'
+import BackButton from '../components/BackButton';
 
-const ItemDetail = ({ route }) => {
+const ItemDetail = ({ route, navigation }) => {
 
   const { product } = route.params;
 
@@ -18,21 +19,24 @@ const ItemDetail = ({ route }) => {
     <ScrollView style={styles.main}>
       {product ? (
         <View style={styles.container}>
-          <Image
-            source={{ uri: product.images[0] }}
-            style={styles.image}
-            resizeMode='cover'
-          />
+          <View style={styles.imageContainer}>
+            <BackButton navigation={navigation} />
+            <Image
+              source={{ uri: product.images[0] }}
+              style={styles.image}
+              resizeMode='cover'
+            />
+          </View>
           <View style={styles.textContainer}>
-            <Text style={styles.descriptionText}>{product.title}</Text>
+            <Text style={styles.title}>{product.title}</Text>
             <Text style={styles.descriptionText}>{product.description}</Text>
-            <Text style={styles.descriptionTextPrice}>${product.price}</Text>
+            <Text style={styles.price}>${product.price}</Text>
           </View>
           <View style={styles.buttonsContainer}>
             <View style={styles.quantityContainer}>
               <Counter />
             </View>
-            <Pressable style={styles.buy} onPress={onAddCart}>
+            <Pressable style={styles.addToCart} onPress={onAddCart}>
               <Text style={styles.buyText}>Agregar al carrito</Text>
             </Pressable>
           </View>
@@ -41,8 +45,9 @@ const ItemDetail = ({ route }) => {
         <View style={styles.container}>
           <ActivityIndicator size="large" color="#000" />
         </View>
-      )}
-    </ScrollView>
+      )
+      }
+    </ScrollView >
   );
 };
 
@@ -58,41 +63,48 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     height: '100%',
-
+  },
+  imageContainer:{
+    width: '100%',
+    position: 'relative',
+    padding: 10,
   },
   image: {
     width: '100%',
     height: 400,
-    marginBottom: 15,
   },
   textContainer: {
     flexDirection: "column",
     alignItems: "flex-start",
     width: "100%",
     paddingHorizontal: 21,
-
+    gap: 10,
+  },
+  title:{
+    fontFamily: 'RobotoRegular',
+    fontSize: 20,
+    color: colors.text_100,
   },
   descriptionText: {
     fontFamily: 'RobotoRegular',
     fontSize: 16,
-    color: colors.text_300,
+    color: colors.text_200,
     paddingVertical: 4,
   },
-  descriptionTextPrice: {
+  price: {
     fontFamily: 'RobotoRegular',
     fontSize: 25,
-    color: colors.text_400,
+    color: colors.text_100,
   },
-  buy: {
-    borderRadius: 12,
-    backgroundColor: colors.bg_dark,
+  addToCart: {
+    borderRadius: 32,
+    backgroundColor: colors.primary_300,
     width: '60%',
   },
   buyText: {
     fontFamily: 'RobotoRegular',
     fontSize: 20,
-    fontWeight: 'bold',
-    color: colors.text_100,
+    color: colors.bg_100,
     textAlign: 'center',
     padding: 15,
   },

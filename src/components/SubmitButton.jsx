@@ -4,7 +4,7 @@ import { colors } from '../global/colors'
 
 const SubmitButton = ({ onPress, children, disabled}) => {
     return(
-        <Pressable style={ disabled ? styles.button : styles.button} onPress={onPress} disabled={disabled}>
+        <Pressable style={ disabled ? styles.btnDisabled : styles.button} onPress={onPress} disabled={disabled}>
             {children}
         </Pressable>
     )
@@ -14,19 +14,19 @@ export default SubmitButton
 
 const styles = StyleSheet.create({
     button: {
-        backgroundColor: colors.bg_dark,
+        backgroundColor: colors.primary_300,
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
-        width: 65,
-        height: 65,
+        width: 70,
+        height: 70,
     },
     btnDisabled:{
-        backgroundColor: '#c2c2c2',
+        backgroundColor: colors.bg_300,
+        borderRadius: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 70,
+        height: 70,
     },
-    textBtn: {
-        color: colors.text_100,
-        fontSize: 18,
-    }
-
 })

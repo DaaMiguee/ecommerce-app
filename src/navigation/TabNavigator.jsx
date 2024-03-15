@@ -24,8 +24,8 @@ const TabNavigator = () => {
                     tabBarIcon: ({ focused }) => {
                         return (
                             <View style={styles.iconContainer}>
-                                <Entypo name="home" size={22} color={focused ? colors.focused : colors.text_200} />
-                                <Text>Inicio</Text>
+                                <Entypo name="home" size={22} color={focused ? colors.text_100 : colors.text_200} />
+                                <Text style={focused ? styles.textFocused : styles.text}>Inicio</Text>
                             </View>
                         )
                     }
@@ -36,8 +36,8 @@ const TabNavigator = () => {
                     tabBarIcon: ({ focused }) => {
                         return (
                             <View style={styles.iconContainer}>
-                                <FontAwesome5 name="shopping-cart" size={22} color={focused ? colors.focused : colors.text_200} />
-                                <Text>Carrito</Text>
+                                <FontAwesome5 name="shopping-cart" size={22} color={focused ? colors.text_100 : colors.text_200} />
+                                <Text style={focused ? styles.textFocused : styles.text}>Carrito</Text>
                             </View>
                         )
                     }
@@ -48,8 +48,8 @@ const TabNavigator = () => {
                     tabBarIcon: ({ focused }) => {
                         return (
                             <View style={styles.iconContainer}>
-                                <Ionicons name="person" size={22} color={focused ? colors.focused : colors.text_200} />
-                                <Text>Perfil</Text>
+                                <Ionicons name="person" size={22} color={focused ? colors.text_100 : colors.text_200} />
+                                <Text style={focused ? styles.textFocused : styles.text}>Perfil</Text>
                             </View>
                         )
                     }
@@ -59,8 +59,8 @@ const TabNavigator = () => {
                     tabBarIcon: ({ focused }) => {
                         return (
                             <View style={styles.iconContainer}>
-                                <Octicons name="list-unordered" size={24} color={focused ? colors.focused : colors.text_200} />
-                                <Text>Pedidos</Text>
+                                <Octicons name="list-unordered" size={24} color={focused ? colors.text_100 : colors.text_200} />
+                                <Text style={focused ? styles.textFocused : styles.text}>Pedidos</Text>
                             </View>
                         )
                     }
@@ -74,12 +74,22 @@ export default TabNavigator;
 const styles = StyleSheet.create({
     tabBar: {
         height: Platform.OS === 'ios' ? 85 : 66,
-        backgroundColor: colors.bg_primary,
+        backgroundColor: colors.bg_100,
         borderTopWidth: 1,
-        borderColor: '#f6f6f6',
+        borderColor: '#d6d6d6',
     },
     iconContainer: {
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    text:{
+        fontFamily: 'RobotoRegular',
+        fontSize: 14,
+        color: colors.text_200,
+    },
+    textFocused:{
+        fontFamily: 'RobotoRegular',
+        fontSize: 14,
+        color: colors.text_100,
     }
 })

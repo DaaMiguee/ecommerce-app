@@ -1,30 +1,39 @@
-import { StyleSheet, FlatList, View } from 'react-native';
+import { StyleSheet, FlatList, View, ActivityIndicator, Text } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import Card from '../components/Card';
 import ProductItem from '../components/ProductItem';
-import allProducts from '../data/products.json';
+import { useGetProductsQuery } from '../services/shopService';
+import TextAlert from '../components/TextAlert';
 
 const ProductsView = ({ keyword, navigation }) => {
-    const [productList, setProductList] = useState([])
+    const [productList, setProductList] = useState([]);
+    const { data, isLoading, error } = useGetProductsQuery();
 
     useEffect(() => {
         if (keyword) {
             const regex = new RegExp(keyword, 'i'); // 'i' hace que la búsqueda sea insensible a mayúsculas y minúsculas
-            const productsFiltered = allProducts.filter(product => regex.test(product.title));
-            setProductList(productsFiltered);
+            if (data) {
+                const productsFiltered = data.filter(product => regex.test(product.title));
+                setProductList(productsFiltered);
+            }
         }
-    }, [keyword]);
+    }, [keyword, data]);
 
     return (
         <Card style={styles.container}>
-            <View  style={styles.listContainer}>
-                <FlatList
-                    numColumns={2}
-                    data={productList}
-                    keyExtractor={item => item.id}
-                    renderItem={({ item }) => <ProductItem navigation={navigation} product={item} style={styles.productItem}/>}
-                />
-            </View>
+            {isLoading ?
+                <ActivityIndicator size='large' color='#000' />
+                :
+                <View style={styles.listContainer}>
+                    {productList.length ?
+                        <FlatList
+                            numColumns={2}
+                            data={productList}
+                            keyExtractor={item => item.id}
+                            renderItem={({ item }) => <ProductItem navigation={navigation} product={item} style={styles.productItem} />}
+                        /> :
+                        <TextAlert label='No se encontraron resultados'/>}
+                </View>}
         </Card>
     )
 }
@@ -35,11 +44,11 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    listContainer:{
-        flex:1,
-        alignItems:'center',
+    listContainer: {
+        flex: 1,
+        alignItems: 'center',
     },
-    productItem:{
-        width:175,
-    }
+    productItem: {
+        width: 175,
+    },
 })

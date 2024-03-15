@@ -3,10 +3,10 @@ import React from 'react';
 import Card from './Card';
 import { colors } from '../global/colors';
 
-const ProductItem = ({ navigation, product, style }) => {
-  
+const ProductItem = ({ navigation, product, style, styleCard }) => {
+
   return (
-    <Pressable onPress={() => navigation.navigate('ItemDetail', {id: product.id, product: product})} style={styles.cardBtn}>
+    <Pressable onPress={() => navigation.navigate('ItemDetail', { id: product.id, product: product })} navigation={navigation} style={{ ...styles.cardBtn, ...styleCard }}>
       <Card style={{ ...styles.cardStyle, ...style }}>
         <View style={styles.imageContainer}>
           <Image
@@ -28,10 +28,10 @@ const ProductItem = ({ navigation, product, style }) => {
 export default ProductItem;
 
 const styles = StyleSheet.create({
-  cardBtn:{
-    width: '50%',
-    justifyContent: 'center',
-    alignItems: 'center',
+  cardBtn: {
+    // width: '50%',
+    // justifyContent: 'center',
+    // alignItems: 'center',
   },
   cardStyle: {
     width: '90%',
@@ -44,15 +44,14 @@ const styles = StyleSheet.create({
   imageContainer: {
     width: '100%',
     height: '70%',
-    borderColor: '#ffffff',
-    borderWidth: 1,
     borderRadius: 12,
+    padding: 10,
     overflow: 'hidden',
+    backgroundColor: colors.bg_300,
   },
   imageStyle: {
     height: '100%',
     width: '100%',
-    objectFit: 'cover',
   },
   textContainer: {
     width: '100%',
@@ -63,11 +62,11 @@ const styles = StyleSheet.create({
   itemName: {
     fontFamily: 'RobotoRegular',
     color: colors.text_200,
-    fontSize: 13,
+    fontSize: 14,
   },
   price: {
     fontFamily: 'RobotoRegular',
-    color: colors.text_400,
+    color: colors.text_100,
     fontSize: 18,
   },
 });
